@@ -1,22 +1,29 @@
 import React from 'react';
 
 class Counter extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      count: 0
-    };
+  constructor(props) {
+    super(props);
   }
 
   render() {
     return (
-    <button onClick={()=> {
-        this.setState({count: this.state.count + 1});
-      }}
-    >
-      Count: {this.state.count}
-    </button>
-
+      <div>
+        <button onClick={()=> {
+            if (this.props.timerOn) {
+              this.props.takeStep();
+            }
+          }}
+        >
+          Steps: {this.props.steps.toFixed(0)}
+        </button>
+        <br/>
+        <button onClick={()=> {
+          this.props.eatCheese();
+        }}
+        >
+          Eat some Cheese
+        </button>
+      </div>
     )
   }
 }
