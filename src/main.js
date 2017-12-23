@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Stats from './stats.js';
 import Counter from './counter.js';
 import Timer from './timer.js';
-import Stats from './stats.js';
 import Mouse from './mouse.js';
 import LeaderBoard from './leaderboard.js';
 
