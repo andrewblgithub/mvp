@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import Counter from './counter';
 import Timer from './timer';
 import Stats from './stats';
+import Mouse from './mouse';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       steps: 0,
+      newSteps: 0,
+      stepRate: 0,
       time: 0,
       timerOn: false,
       score: 0,
@@ -18,13 +21,28 @@ class App extends React.Component {
       speed: 1
     }
   }
+  componentDidMount() {
+    // timer to get rate
+    setInterval(()=> {
+      this.setState({
+        stepRate: this.state.newSteps,
+        newSteps: 0
+      })
+    }, 500)
+  }
   takeStep() {
-    this.setState({steps: this.state.steps + this.state.speed})
+    this.setState({
+
+    })
+    this.setState({
+      steps: this.state.steps + this.state.speed,
+      newSteps: this.state.newSteps + 1
+    })
   }
   eatCheese() {
-    if (this.state.cheese >= 1 && !this.state.timerOn) {
+    if (this.state.totalCheese >= 1 && !this.state.timerOn) {
       this.setState({
-        cheese: this.state.cheese - 1,
+        totalCheese: this.state.totalCheese - 1,
         speed: this.state.speed + 0.1
       })
     }
@@ -35,12 +53,12 @@ class App extends React.Component {
     })
     setTimeout(()=> {
       this.setState({
-        time: this.state.time + 1,
+        time: this.state.time + 1
       })
       if (this.state.time === 5) {
         this.setState({
           score: this.state.steps,
-          cheese: this.state.steps / 5,
+          cheese: this.state.steps / 75,
           steps: 0,
           time: 0,
           timerOn: false
@@ -61,20 +79,25 @@ class App extends React.Component {
       <div>
         <Timer 
           time = {this.state.time}
-          startTimer = {this.startTimer.bind(this)}
-          timerOn = {this.state.timerOn}
         />
         <Counter 
           steps = {this.state.steps}
-          takeStep = {this.takeStep.bind(this)}
-          timerOn = {this.state.timerOn}
-          eatCheese = {this.eatCheese.bind(this)}
         />
         <Stats
           score = {this.state.score}
           highScore = {this.state.highScore}
           cheese = {this.state.cheese}
           totalCheese = {this.state.totalCheese}
+          speed = {this.state.speed}
+          />
+        <Mouse
+          startTimer = {this.startTimer.bind(this)}
+          takeStep = {this.takeStep.bind(this)}
+          eatCheese = {this.eatCheese.bind(this)}
+          timerOn = {this.state.timerOn}
+          time = {this.state.time}
+          steps = {this.state.steps}
+          stepRate = {this.state.stepRate}
           speed = {this.state.speed}
         />
       </div>

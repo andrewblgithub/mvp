@@ -8,21 +8,7 @@ class Counter extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={()=> {
-            if (this.props.timerOn) {
-              this.props.takeStep();
-            }
-          }}
-        >
-          Steps: {this.props.steps.toFixed(0)}
-        </button>
-        <br/>
-        <button onClick={()=> {
-          this.props.eatCheese();
-        }}
-        >
-          Eat some Cheese
-        </button>
+        Steps: {this.props.steps.toFixed(0)}
       </div>
     )
   }
