@@ -19,7 +19,11 @@ class App extends React.Component {
       highScore: 0,
       cheese: 0,
       totalCheese: 0,
-      speed: 1
+      speed: 1,
+      name: 'Anonymouse',
+      date: new Date().toString(),
+      scoresList: [],
+      cheeseList: []
     }
     this.appStyle = {
       height: '100%',
@@ -27,7 +31,8 @@ class App extends React.Component {
     }
   }
   componentDidMount() {
-    // timer to get rate
+    this.setUser()
+    this.getLeaderboard()
     setInterval(()=> {
       this.setState({
         stepRate: this.state.newSteps,
@@ -36,9 +41,7 @@ class App extends React.Component {
     }, 500)
   }
   takeStep() {
-    this.setState({
-
-    })
+    console.log(this.state.scoresList, this.state.cheeseList)
     this.setState({
       steps: this.state.steps + this.state.speed,
       newSteps: this.state.newSteps + 1
@@ -51,6 +54,41 @@ class App extends React.Component {
         speed: this.state.speed + 0.1
       })
     }
+  }
+  setUser() {
+    let name = prompt('Enter your mouse name')
+    if (name) {
+      this.setState({name: name})
+    }
+  }
+  getLeaderboard() {
+    fetch('http://localhost:3000/leaderboards')
+    .then((data)=> {
+      return data.json()
+    })
+    .then((data)=> {
+      this.setState({
+        scoresList: data.scores,
+        cheeseList: data.cheese
+      })
+    })
+  }
+  sendScores() {
+    fetch('http://localhost:3000/leaderboards', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: this.state.name,
+        highScore: this.state.highScore,
+        totalCheese: this.state.totalCheese,
+        date: this.state.date
+      })
+    })
+    .then(()=> {
+      this.getLeaderboard();
+    })
   }
   startTimer() {
     this.setState({
@@ -74,6 +112,7 @@ class App extends React.Component {
         this.setState({
           totalCheese: this.state.totalCheese + this.state.cheese
         })
+        this.sendScores()
       } else {
         this.startTimer();
       }
@@ -81,41 +120,45 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div 
-        onClick={()=> {
-          if (!this.state.timerOn) {
-            this.startTimer();
-          } else {
-            this.takeStep();
-          }
-        }}
-        style={this.appStyle}
-      >
-        <Timer 
-          time = {this.state.time}
-        />
-        <Counter 
-          steps = {this.state.steps}
-          stepRate = {this.state.stepRate}
-        />
-        <Stats
-          score = {this.state.score}
-          highScore = {this.state.highScore}
-          cheese = {this.state.cheese}
-          totalCheese = {this.state.totalCheese}
-          speed = {this.state.speed}
+      <div>
+        <div>
+          <LeaderBoard/>
+        </div>
+        <div 
+          onClick={()=> {
+            if (!this.state.timerOn) {
+              this.startTimer();
+            } else {
+              this.takeStep();
+            }
+          }}
+          style={this.appStyle}
+        >
+          <Timer 
+            time = {this.state.time}
           />
-        <Mouse
-          startTimer = {this.startTimer.bind(this)}
-          takeStep = {this.takeStep.bind(this)}
-          eatCheese = {this.eatCheese.bind(this)}
-          timerOn = {this.state.timerOn}
-          time = {this.state.time}
-          steps = {this.state.steps}
-          stepRate = {this.state.stepRate}
-          speed = {this.state.speed}
-        />
-        <LeaderBoard/>
+          <Counter 
+            steps = {this.state.steps}
+            stepRate = {this.state.stepRate}
+          />
+          <Stats
+            score = {this.state.score}
+            highScore = {this.state.highScore}
+            cheese = {this.state.cheese}
+            totalCheese = {this.state.totalCheese}
+            speed = {this.state.speed}
+            />
+          <Mouse
+            startTimer = {this.startTimer.bind(this)}
+            takeStep = {this.takeStep.bind(this)}
+            eatCheese = {this.eatCheese.bind(this)}
+            timerOn = {this.state.timerOn}
+            time = {this.state.time}
+            steps = {this.state.steps}
+            stepRate = {this.state.stepRate}
+            speed = {this.state.speed}
+          />
+        </div>
       </div>
     )
   }

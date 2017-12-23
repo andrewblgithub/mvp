@@ -27,13 +27,18 @@ class Mouse extends React.Component {
     }
   }
 
+  buttonHandler(e) {
+    e.stopPropagation();
+    this.props.eatCheese();
+  }
+
   render() {
     return (
       <div>
         <br/>
         <button
-          onClick={()=> {
-            this.props.eatCheese();
+          onClick={(e)=> {
+            this.buttonHandler(e);
           }}
           style={this.buttonStyle}
         >

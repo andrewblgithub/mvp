@@ -10,13 +10,11 @@ class Stats extends React.Component {
     <div>
       Speed Boost: {this.props.speed.toFixed(1)}
       <br/>
-      Score: {this.props.score.toFixed(1)}
+      Last Score: {this.props.score.toFixed(1)}
       <br/>
       High Score: {this.props.highScore.toFixed(1)}
       <br/>
-      Cheese: {this.props.cheese.toFixed(1)}
-      <br/>
-      Total Cheese: {this.props.totalCheese.toFixed(1)}
+      Cheese: {this.props.totalCheese.toFixed(1)}
     </div>
 
     )
