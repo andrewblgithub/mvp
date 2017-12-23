@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Counter from './counter';
-import Timer from './timer';
-import Stats from './stats';
-import Mouse from './mouse';
-import LeaderBoard from './leaderboard';
+import Counter from '../src/counter';
+import Timer from '../src/timer';
+import Stats from '../src/stats';
+import Mouse from '../src/mouse';
+import LeaderBoard from '../src/leaderboard';
 
 class App extends React.Component {
   constructor(props) {
