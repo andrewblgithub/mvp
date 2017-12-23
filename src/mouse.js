@@ -47,6 +47,7 @@ class Mouse extends React.Component {
         <br/>
         <br/>
         <video 
+          playsinline
           style = {this.videoStyle}
           ref = 'vidRef'
           poster = 'https://res.cloudinary.com/duxbiywzd/image/upload/v1513972214/standingmouse_mp07qq.jpg'
