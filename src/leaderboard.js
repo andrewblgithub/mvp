@@ -35,14 +35,14 @@ class LeaderBoard extends React.Component {
             <TabPanel>
               <ol>
                 {this.props.scoresList.map((item, i)=> {
-                  return (<li key={i}>{item.name} - {item.highScore}</li>)
+                  return (<li key={i}>{item.name} - {item.highScore.toFixed(2)}</li>)
                 })}
               </ol>
             </TabPanel>
             <TabPanel>
               <ol>
                 {this.props.cheeseList.map((item, i)=> {
-                  return (<li key={i}>{item.name} - {item.totalCheese}</li>)
+                  return (<li key={i}>{item.name} - {item.totalCheese.toFixed(2)}</li>)
                 })}
               </ol>
             </TabPanel>
