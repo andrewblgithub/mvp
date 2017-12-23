@@ -48,7 +48,6 @@ class App extends React.Component {
     }, 500)
   }
   takeStep() {
-    console.log(this.state.scoresList, this.state.cheeseList)
     this.setState({
       steps: this.state.steps + this.state.speed,
       newSteps: this.state.newSteps + 1
