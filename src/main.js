@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Stats from './stats.js';
-import Counter from './counter.js';
+// import Counter from './counter.js';
 import Timer from './timer.js';
 import Mouse from './mouse.js';
 import LeaderBoard from './leaderboard.js';
@@ -151,10 +151,10 @@ class App extends React.Component {
           <Timer 
             time = {this.state.time}
           />
-          <Counter 
+          {/* <Counter 
             steps = {this.state.steps}
             stepRate = {this.state.stepRate}
-          />
+          /> */}
           <Stats
             score = {this.state.score}
             highScore = {this.state.highScore}
