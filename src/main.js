@@ -38,11 +38,13 @@ class App extends React.Component {
   }
   componentDidMount() {
     this.setUser()
+    alert('Instructions: Tap to run! After 5 seconds your score is recorded. Eat cheese to boost your speed. Your speed boost will slowly decrease over time so keep eating cheese. Check the leaderboards to compare scores and total cheese.')
     this.getLeaderboard()
     setInterval(()=> {
       this.setState({
         stepRate: this.state.newSteps,
-        newSteps: 0
+        newSteps: 0,
+        speed: this.state.speed > 1 ? this.state.speed - 0.001 : this.state.speed
       })
     }, 500)
   }
