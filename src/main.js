@@ -4,6 +4,7 @@ import Counter from './counter';
 import Timer from './timer';
 import Stats from './stats';
 import Mouse from './mouse';
+import LeaderBoard from './leaderboard';
 
 class App extends React.Component {
   constructor(props) {
@@ -19,6 +20,10 @@ class App extends React.Component {
       cheese: 0,
       totalCheese: 0,
       speed: 1
+    }
+    this.appStyle = {
+      height: '100%',
+      cursor: 'pointer'
     }
   }
   componentDidMount() {
@@ -40,7 +45,7 @@ class App extends React.Component {
     })
   }
   eatCheese() {
-    if (this.state.totalCheese >= 1 && !this.state.timerOn) {
+    if (this.state.totalCheese >= 1) {
       this.setState({
         totalCheese: this.state.totalCheese - 1,
         speed: this.state.speed + 0.1
@@ -76,12 +81,22 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div 
+        onClick={()=> {
+          if (!this.state.timerOn) {
+            this.startTimer();
+          } else {
+            this.takeStep();
+          }
+        }}
+        style={this.appStyle}
+      >
         <Timer 
           time = {this.state.time}
         />
         <Counter 
           steps = {this.state.steps}
+          stepRate = {this.state.stepRate}
         />
         <Stats
           score = {this.state.score}
@@ -100,6 +115,7 @@ class App extends React.Component {
           stepRate = {this.state.stepRate}
           speed = {this.state.speed}
         />
+        <LeaderBoard/>
       </div>
     )
   }

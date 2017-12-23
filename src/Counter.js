@@ -9,6 +9,8 @@ class Counter extends React.Component {
     return (
       <div>
         Steps: {this.props.steps.toFixed(0)}
+        <br/>
+        Steps per Second: {this.props.stepRate * 5}
       </div>
     )
   }

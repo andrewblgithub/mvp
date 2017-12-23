@@ -8,7 +8,7 @@ class Stats extends React.Component {
   render() {
     return (
     <div>
-      Current Speed: {this.props.speed.toFixed(1)}
+      Speed Boost: {this.props.speed.toFixed(1)}
       <br/>
       Score: {this.props.score.toFixed(1)}
       <br/>
