@@ -29,6 +29,13 @@ class App extends React.Component {
       height: '100%',
       cursor: 'pointer'
     }
+    this.audioStyle = {
+      width: '0',
+      height: '0',
+      border: '0',
+      border: 'none'
+    }
+    this.endpoint = process.env.ENDPOINT || 'http://localhost:3000/leaderboards'
   }
   componentDidMount() {
     this.setUser()
@@ -62,7 +69,7 @@ class App extends React.Component {
     }
   }
   getLeaderboard() {
-    fetch('http://localhost:3000/leaderboards')
+    fetch(this.endpoint)
     .then((data)=> {
       return data.json()
     })
@@ -74,7 +81,7 @@ class App extends React.Component {
     })
   }
   sendScores() {
-    fetch('http://localhost:3000/leaderboards', {
+    fetch(this.endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -121,6 +128,11 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        {/* <iframe
+          src="https://www.youtube.com/embed/7k_FJ8pqWM4?autoplay=1&loop=1"
+          style={this.audioStyle}
+        >
+        </iframe> */}
         <div>
           <LeaderBoard
             scoresList={this.state.scoresList}
