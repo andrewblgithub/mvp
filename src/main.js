@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Stats from './stats.js';
-// import Counter from './counter.js';
+import StepCounter from './stepcounter.js';
 import Timer from './timer.js';
 import Mouse from './mouse.js';
 import LeaderBoard from './leaderboard.js';
@@ -35,7 +35,6 @@ class App extends React.Component {
       border: '0',
       border: 'none'
     }
-    this.endpoint = process.env.ENDPOINT || 'http://localhost:3000/leaderboards'
   }
   componentDidMount() {
     this.setUser()
@@ -68,7 +67,7 @@ class App extends React.Component {
     }
   }
   getLeaderboard() {
-    fetch(this.endpoint)
+    fetch('/leaderboards')
     .then((data)=> {
       return data.json()
     })
@@ -80,7 +79,7 @@ class App extends React.Component {
     })
   }
   sendScores() {
-    fetch(this.endpoint, {
+    fetch('/leaderboards', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -151,10 +150,10 @@ class App extends React.Component {
           <Timer 
             time = {this.state.time}
           />
-          {/* <Counter 
+          <StepCounter 
             steps = {this.state.steps}
             stepRate = {this.state.stepRate}
-          /> */}
+          />
           <Stats
             score = {this.state.score}
             highScore = {this.state.highScore}
