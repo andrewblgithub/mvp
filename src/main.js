@@ -122,7 +122,10 @@ class App extends React.Component {
     return (
       <div>
         <div>
-          <LeaderBoard/>
+          <LeaderBoard
+            scoresList={this.state.scoresList}
+            cheeseList={this.state.cheeseList}
+          />
         </div>
         <div 
           onClick={()=> {
